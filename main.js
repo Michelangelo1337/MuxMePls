@@ -8,6 +8,7 @@ const childProcess = require("child_process");
 const chalk = require("chalk");
 const path = process.argv[2];
 const prompt = require("prompt-sync")();
+const os = require("os");
 
 // Defaults
 const getMkvs = getFiles.findFiles(path, ".mkv");
@@ -31,13 +32,25 @@ if (getMkvs.length <= 0) {
   return;
 }
 
-const mkvmerge = __dirname + "/bin/mkvmerge.exe";
+const mkvmergePath = "mkvmerge.exe";
+const mkvmergeLocal = __dirname + "/bin/mkvmerge.exe";
+
+function executeMkvMerge() {
+  if (os.type() === "Linux") {
+    return "/usr/bin/mkvmerge";
+  }
+  if (os.type() === "Windows_NT") {
+    if (mkvmergePath) {
+      return mkvmergePath;
+    } else {
+      return mkvmergeLocal;
+    }
+  }
+}
 if (path === undefined) {
   console.log(chalk.red("[ERROR]") + " Path is not defined");
   return;
 }
-
-// console.log("The target path is " + path);
 process.chdir(path);
 
 let relativeVideoTargetPath = "muxoutput";
@@ -103,7 +116,7 @@ for (let i = 0; i < getMkvs.length; i++) {
   mkvmergeArguments.push(...getFontArguments(getFonts));
 
   mkvMergeTools.saveFile(path + `/mkvmerge_${i}.json`, mkvmergeArguments);
-  childProcess.execSync(mkvmerge + ` @mkvmerge_${i}.json`, {
+  childProcess.execSync(executeMkvMerge() + ` @mkvmerge_${i}.json`, {
     stdio: "inherit",
   });
   const jsonPath = path + `/mkvmerge_${i}.json`;
@@ -116,7 +129,3 @@ for (let i = 0; i < getMkvs.length; i++) {
     `\n${chalk.green("[Processed]")} ${chalk.magenta(`${getMkvs[i]}`)}!\n`
   );
 }
-
-// 1. Negative Zeilen : mkvmerge bricht ab, JSON Datei von der vorherigem Video wird nicht gelöscht.
-// 2. Compile Node.js to exe and linux
-// 3. Make discovery of the correct audi and video IDs
