@@ -22,7 +22,7 @@ once you add the repository to PATH you can use MuxMePls simply by opening a ter
 
 If you are using the compiled version after you added it to PATH: <br/>
 
-`MuxMePls.exe "PATH"`
+`MuxMePls.exe "path/to/mkv/and/ass"`
 
 If you cloned the repoistory and added it to PATH, just navigate to the folder that contains the files and run: `MuxMePls`
 
