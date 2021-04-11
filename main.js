@@ -32,21 +32,15 @@ if (getMkvs.length <= 0) {
   return;
 }
 
-const mkvmergePath = "mkvmerge.exe";
-const mkvmergeLocal = __dirname + "/bin/mkvmerge.exe";
-
 function executeMkvMerge() {
   if (os.type() === "Linux") {
-    return "/usr/bin/mkvmerge";
+    return "mkvmerge";
   }
   if (os.type() === "Windows_NT") {
-    if (mkvmergePath) {
-      return mkvmergePath;
-    } else {
-      return mkvmergeLocal;
-    }
-  }
+    return "mkvmerge.exe"
+ }
 }
+
 if (path === undefined) {
   console.log(chalk.red("[ERROR]") + " Path is not defined");
   return;
@@ -128,4 +122,5 @@ for (let i = 0; i < getMkvs.length; i++) {
   console.log(
     `\n${chalk.green("[Processed]")} ${chalk.magenta(`${getMkvs[i]}`)}!\n`
   );
+  console.log("======================================================")
 }
