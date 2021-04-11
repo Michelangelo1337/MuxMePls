@@ -10,6 +10,11 @@ const path = process.argv[2];
 const prompt = require("prompt-sync")();
 const os = require("os");
 
+if (path === undefined) {
+  console.log(chalk.red("[ERROR]") + " Path is not defined");
+  return;
+}
+
 // Defaults
 const getMkvs = getFiles.findFiles(path, ".mkv");
 const getAss = getFiles.findFiles(path, ".ass");
@@ -41,10 +46,6 @@ function executeMkvMerge() {
  }
 }
 
-if (path === undefined) {
-  console.log(chalk.red("[ERROR]") + " Path is not defined");
-  return;
-}
 process.chdir(path);
 
 let relativeVideoTargetPath = "muxoutput";
