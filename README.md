@@ -7,7 +7,7 @@ The "mkv" and "ass" files do not have to match. As long as both are in a ordered
 
 You can download the compiled version from the release page [here](https://github.com/Michelangelo1337/MuxMePls/releases)
 
-MuxMePls looks by default in PATH for mkvmerge. If it's not added, it will check the bin folder where you can add mkvmerge to instead of adding it to PATH 
+**mkvmerge needs to be in PATH in order for MuxMePls to work**
 
 Or you can just clone the repoistory and install the modules 
 
