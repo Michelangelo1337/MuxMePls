@@ -22,6 +22,11 @@ const getFonts = getFiles.findFiles(path, [".otf", ".ttf", ".OTF", ".TTF"]);
 
 console.log(`\n=== MuxMePls ${packageJson.version} ===\n`);
 
+if (getMkvs.length <= 0 && getAss.length <= 0 && getFonts.length <= 0) {
+  console.log(chalk.red("[ERROR] No video, subtitle and font files were found.."));
+  return;
+}
+
 if (getFonts.length <= 0) {
   console.log(chalk.red("[ERROR]") + " I did not find any Fonts, Skipping..");
   return;
