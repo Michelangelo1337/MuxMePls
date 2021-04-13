@@ -1,6 +1,6 @@
 {
   "name": "muxmepls",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "MuxMePls is a nodejs utility to mux \".ass\" subtitles together with the fonts specified in a font folder into mkv container",
   "main": "main.js",
   "scripts": {

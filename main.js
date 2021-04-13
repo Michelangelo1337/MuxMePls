@@ -23,7 +23,9 @@ const getFonts = getFiles.findFiles(path, [".otf", ".ttf", ".OTF", ".TTF"]);
 console.log(`\n=== MuxMePls ${packageJson.version} ===\n`);
 
 if (getMkvs.length <= 0 && getAss.length <= 0 && getFonts.length <= 0) {
-  console.log(chalk.red("[ERROR] No video, subtitle and font files were found.."));
+  console.log(
+    chalk.red("[ERROR] No video, subtitle and font files were found..")
+  );
   return;
 }
 
@@ -47,8 +49,8 @@ function executeMkvMerge() {
     return "mkvmerge";
   }
   if (os.type() === "Windows_NT") {
-    return "mkvmerge.exe"
- }
+    return "mkvmerge.exe";
+  }
 }
 
 process.chdir(path);
@@ -128,5 +130,7 @@ for (let i = 0; i < getMkvs.length; i++) {
   console.log(
     `\n${chalk.green("[Processed]")} ${chalk.magenta(`${getMkvs[i]}`)}!\n`
   );
-  console.log("======================================================")
+  console.log(
+    "=============================================================================================="
+  );
 }
