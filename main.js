@@ -19,7 +19,6 @@ if (path === undefined) {
 const getMkvs = getFiles.findFiles(path, ".mkv");
 const getAss = getFiles.findFiles(path, ".ass");
 const getFonts = getFiles.findFiles(path, [".otf", ".ttf", ".OTF", ".TTF"]);
-
 console.log(`\n=== MuxMePls ${packageJson.version} ===\n`);
 
 if (getMkvs.length <= 0 && getAss.length <= 0 && getFonts.length <= 0) {
@@ -29,10 +28,10 @@ if (getMkvs.length <= 0 && getAss.length <= 0 && getFonts.length <= 0) {
   return;
 }
 
-if (getFonts.length <= 0) {
-  console.log(chalk.red("[ERROR]") + " I did not find any Fonts, Skipping..");
-  return;
-}
+// if (getFonts.length <= 0) {
+//   console.log(chalk.red("[ERROR]") + " I did not find any Fonts, Skipping..");
+//   return;
+// }
 
 if (getAss.length <= 0) {
   console.log(chalk.red("[ERROR] Subtitle Files not found. Skipping.."));
@@ -68,12 +67,6 @@ if (!fs.existsSync(videoTargetPath)) {
   fs.mkdirSync(videoTargetPath);
 }
 
-// function extractFontName(font) {
-//   const indexOfslash = font.indexOf("/") + 1
-//   const extract = font.slice(indexOfslash)
-//   return extract
-// }
-
 function getFontArguments(fonts) {
   let result = [];
   for (let i = 0; i < fonts.length; i++) {
@@ -87,18 +80,50 @@ function getFontArguments(fonts) {
   return result;
 }
 
+let askForAnimeName, askForFormat, askIfWishToRename, fileBotFormat;
 const subtitleLanguageISO = prompt(
-  `What subtitle language are you muxing? (Both ISO 639-2 language codes and ISO 639-1 country codes are allowed): `
+  chalk.cyan("[PROMPT] ") +
+    "What subtitle language are you muxing? (Both ISO 639-2 language codes and ISO 639-1 country codes are allowed): "
 );
-const askForFansubTeam = prompt(`TL Team ? `);
+const askForFansubTeam = prompt(chalk.cyan("[PROMPT] ") + `TL Team ? `);
+askIfWishToRename = prompt(
+  chalk.cyan("[PROMPT] ") +
+    "Do you wish to rename the files with filebot? (y/n) "
+);
+const renameFiles = function () {
+  if (askIfWishToRename === "n") {
+    return false;
+  } else if (askIfWishToRename === "y") {
+    askForAnimeName = prompt(
+      chalk.cyan("[PROMPT] ") + "What's the anime name ? "
+    );
+    askForFormat = prompt(
+      chalk.cyan("[PROMPT] ") +
+        "Do you wish to specify an output foramt for Filebot? (y/n) "
+    );
+    if (askForFormat === "y") {
+      fileBotFormat = prompt(
+        chalk.cyan("[PROMPT] ") + "Please paste your own format here : "
+      );
+    } else {
+      console.log(
+        ` ${chalk.blueBright(
+          "[LOG] "
+        )} "Alright, I will use filebot's default foramt" `
+      );
+    }
+  }
+};
 
+renameFiles();
 for (let i = 0; i < getMkvs.length; i++) {
   let mkvmergeArguments = [];
+  let finalOutPut = relativeVideoTargetPath + "/" + getMkvs[i];
   console.log(
     `\n${chalk.cyan("[Processing]")} ${chalk.green(`${getMkvs[i]}`)}\n`
   );
   mkvmergeArguments.push("--output");
-  mkvmergeArguments.push(relativeVideoTargetPath + "/" + getMkvs[i]);
+  mkvmergeArguments.push(`${finalOutPut}`);
   mkvmergeArguments.push(
     "--language",
     "1:jpn",
@@ -121,6 +146,18 @@ for (let i = 0; i < getMkvs.length; i++) {
   childProcess.execSync(executeMkvMerge() + ` @mkvmerge_${i}.json`, {
     stdio: "inherit",
   });
+  // {n.space('.')}.{'S'+s.pad(2)}E{e.pad(2)}.{t.space('.')}.{vf}.{ac}.{channels}.{vc} 
+  if (askIfWishToRename === "y") {
+    childProcess.execSync(
+      "filebot " +
+        `-rename "${finalOutPut}" --db "TheTVDB" -non-strict --q "${askForAnimeName}" --format ${
+          askForFormat === "y" ? `"${fileBotFormat}"` : `"{n} - {s00e00} - {t}"`
+        }`,
+      {
+        stdio: "inherit",
+      }
+    );
+  }
   const jsonPath = path + `/mkvmerge_${i}.json`;
   try {
     fs.unlinkSync(jsonPath);
@@ -131,6 +168,6 @@ for (let i = 0; i < getMkvs.length; i++) {
     `\n${chalk.green("[Processed]")} ${chalk.magenta(`${getMkvs[i]}`)}!\n`
   );
   console.log(
-    "=============================================================================================="
+    "========================================================================================================="
   );
 }
