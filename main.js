@@ -28,10 +28,9 @@ if (getMkvs.length <= 0 && getAss.length <= 0 && getFonts.length <= 0) {
   return;
 }
 
-// if (getFonts.length <= 0) {
-//   console.log(chalk.red("[ERROR]") + " I did not find any Fonts, Skipping..");
-//   return;
-// }
+if (getFonts.length <= 0) {
+  console.log(chalk.yellow("[ERROR] I did not find any Fonts!!"));
+}
 
 if (getAss.length <= 0) {
   console.log(chalk.red("[ERROR] Subtitle Files not found. Skipping.."));
