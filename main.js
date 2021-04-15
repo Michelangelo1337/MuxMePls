@@ -29,7 +29,7 @@ if (getMkvs.length <= 0 && getAss.length <= 0 && getFonts.length <= 0) {
 }
 
 if (getFonts.length <= 0) {
-  console.log(chalk.yellow("[ERROR] I did not find any Fonts!!"));
+  console.log(`${chalk.yellow("[WARNING] I did not find any Fonts!!")}\n`);
 }
 
 if (getAss.length <= 0) {
