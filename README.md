@@ -1,4 +1,5 @@
 # MuxMePls
+
 MuxMePls is a nodejs utility to mux ".ass" subtitles together with the fonts specified in a font folder into mkv container.
 
 The "mkv" and "ass" files do not have to match. As long as both are in a ordered list, It will match them and merge them together with the fonts.
@@ -9,7 +10,7 @@ You can download the compiled version from the release page [here](https://githu
 
 **mkvmerge needs to be in PATH in order for MuxMePls to work**
 
-Or you can just clone the repoistory and install the modules 
+Or you can just clone the repoistory and install the modules
 
 `git clone https://github.com/Michelangelo1337/MuxMePls.git` <br/>
 `cd MuxMePls` <br/>
@@ -19,6 +20,12 @@ The repository already contains a shell script and a bash script for both linux 
 once you add the repository to PATH you can use MuxMePls simply by opening a terminal and typing `MuxMePls.bat` for Windows **OR** `MuxMePls.sh` for Linux
 
 ## Usage
+
+## Builds
+
+nexe version : nexe 4.0.0-beta.18
+node version : v15.5.0
+npm version : 7.3.0
 
 If you are using the compiled version after you added it to PATH: <br/>
 
@@ -31,4 +38,5 @@ If you cloned the repoistory and added it to PATH, just navigate to the folder t
 Software contributions are welcome. If you are not a dev, testing and reproting bugs can also be very helpful!
 
 ## Questions?
+
 Please make an issue if you have questions, wish to request a feature, etc.
