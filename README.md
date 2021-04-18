@@ -21,14 +21,6 @@ once you add the repository to PATH you can use MuxMePls simply by opening a ter
 
 ## Usage
 
-## Builds
-
-nexe version : nexe 4.0.0-beta.18
-
-node version : v15.5.0
-
-npm version : 7.3.0
-
 If you are using the compiled version after you added it to PATH: <br/>
 
 `MuxMePls.exe "path/to/mkv/and/ass"`
