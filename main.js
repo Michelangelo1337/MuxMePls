@@ -142,9 +142,16 @@ for (let i = 0; i < getMkvs.length; i++) {
   mkvmergeArguments.push(...getFontArguments(getFonts));
 
   mkvMergeTools.saveFile(path + `/mkvmerge_${i}.json`, mkvmergeArguments);
-  childProcess.execSync(executeMkvMerge() + ` @mkvmerge_${i}.json`, {
-    stdio: "inherit",
-  });
+
+  try {
+    childProcess.execSync(executeMkvMerge() + ` @mkvmerge_${i}.json`, {
+      stdio: "inherit",
+    });
+  } catch (error) {
+    console.log("[NASA] Houston we got a problem... :)...")
+    console.log(error);
+  }
+
   // {n.space('.')}.{'S'+s.pad(2)}E{e.pad(2)}.{t.space('.')}.{vf}.{ac}.{channels}.{vc} 
   if (askIfWishToRename === "y") {
     childProcess.execSync(
