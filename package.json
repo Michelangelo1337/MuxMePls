@@ -4,7 +4,10 @@
   "description": "MuxMePls is a nodejs utility to mux \".ass\" subtitles together with the fonts specified in a font folder into mkv container",
   "main": "main.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build-win64": "nexe main.js -t win-x64 --build",
+    "build-linux64": "nexe main.js -t linux-x64 --build",
+    "build-macos64": "nexe main.js -t macos-x64 --build"
   },
   "repository": {
     "type": "git",
