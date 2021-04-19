@@ -1,7 +1,7 @@
 # MuxMePls
 
 ![MIT License](https://img.shields.io/static/v1.svg?label=📜%20License&message=MIT&color=informational)
-[![TeamCity](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/e/buildtype.svg?style=flat-square)]()passing
+[![Travis CI](https://img.shields.io/travis/Michelangelo1337/repository.svg?style=flat-square)](https://travis-ci.org/Michelangelo1337/repository)
 
 MuxMePls is a nodejs utility to mux ".ass" subtitles together with the fonts specified in a font folder into mkv container.
 
