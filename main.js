@@ -147,12 +147,11 @@ for (let i = 0; i < getMkvs.length; i++) {
     childProcess.execSync(executeMkvMerge() + ` @mkvmerge_${i}.json`, {
       stdio: "inherit",
     });
-  } catch (error) {
-    console.log("[NASA] Houston we got a problem... :)...")
-    console.log(error);
+  } catch (err) {
+    console.log(chalk.red("[ERROR]") + ": " + err.message);
   }
 
-  // {n.space('.')}.{'S'+s.pad(2)}E{e.pad(2)}.{t.space('.')}.{vf}.{ac}.{channels}.{vc} 
+  // {n.space('.')}.{'S'+s.pad(2)}E{e.pad(2)}.{t.space('.')}.{vf}.{ac}.{channels}.{vc}
   if (askIfWishToRename === "y") {
     childProcess.execSync(
       "filebot " +
