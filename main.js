@@ -128,8 +128,6 @@ for (let i = 0; i < getMkvs.length; i++) {
     "1:jpn",
     "--video-tracks",
     "0",
-    "--audio-tracks",
-    "1",
     `${getMkvs[i]}`,
     "--track-name",
     `0:${askForFansubTeam}`,
