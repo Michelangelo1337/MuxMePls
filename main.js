@@ -130,6 +130,8 @@ for (let i = 0; i < getMkvs.length; i++) {
     "0",
     "--audio-tracks",
     "1",
+    "--audio-tracks",
+    "2",
     `${getMkvs[i]}`,
     "--track-name",
     `0:${askForFansubTeam}`,
