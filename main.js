@@ -16,7 +16,7 @@ if (path === undefined) {
 }
 
 // Defaults
-const getMkvs = getFiles.findFiles(path, ".mkv");
+const getMkvs = getFiles.findFiles(path, [".mkv", ".mp4"]);
 const getAss = getFiles.findFiles(path, ".ass");
 const getFonts = getFiles.findFiles(path, [".otf", ".ttf", ".OTF", ".TTF"]);
 console.log(`\n=== MuxMePls ${packageJson.version} ===\n`);
