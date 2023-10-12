@@ -1,9 +1,9 @@
 function fontMime(fontFile) {
   if (fontFile.match(/\.otf$/) || fontFile.match(/\.OTF$/)) {
-    return "application/vnd.ms-opentype";
+    return "font/otf";
   }
   if (fontFile.match(/\.ttf$/) || fontFile.match(/\.TTF$/)) {
-    return "application/x-truetype-font";
+    return "font/ttf";
   }
   return "application/octet-stream";
 }
